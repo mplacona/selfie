@@ -25,7 +25,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,17 +41,6 @@ public final class Selfie {
 
     private static final String TAG = "Selfie";
     private static SelfieInstance mInstance;
-
-    public static void initialize(){
-        if (mInstance == null) {
-            mInstance = new SelfieInstance
-                    .SelfieBuilder()
-                    .format("yyyy-MM-dd_hh:mm:ss")
-                    .path(Environment.getExternalStorageDirectory().toString())
-                    .quality(100)
-                    .build();
-        }
-    }
 
     /**
      * Create a snapshot
@@ -100,6 +88,36 @@ public final class Selfie {
         } catch (Throwable e) {
             // Several error may come out with file handling or OOM
             e.printStackTrace();
+        }
+    }
+
+    public static class Builder {
+        private String format = "yyyy-MM-dd_hh:mm:ss";
+        private String path = Environment.getExternalStorageDirectory().toString();
+        private int quality = 100;
+
+        public Builder format(String format) {
+            this.format = format;
+            return this;
+        }
+
+        public Builder path(String path) {
+            this.path = path;
+            return this;
+        }
+
+        public Builder quality(int quality) {
+            this.quality = quality;
+            return this;
+        }
+
+        public void build() {
+            mInstance =  new SelfieInstance
+                    .SelfieBuilder()
+                    .format(this.format)
+                    .path(this.path)
+                    .quality(this.quality)
+                    .build();
         }
     }
 }

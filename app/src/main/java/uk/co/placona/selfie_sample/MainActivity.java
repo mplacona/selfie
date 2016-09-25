@@ -1,6 +1,7 @@
 package uk.co.placona.selfie_sample;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Selfie.initialize();
+        new Selfie.Builder()
+                .format("yyyy-MM-dd_hh:mm:ss")
+                .path(Environment.getExternalStorageDirectory().toString())
+                .quality(100)
+                .build();
 
     }
 
