@@ -16,6 +16,9 @@ package uk.co.placona.selfie;
  * limitations under the License.
  */
 
+/**
+ * Creates a new instance of the Selfie module
+ */
 class SelfieInstance {
     private final String format;
     private final String path;

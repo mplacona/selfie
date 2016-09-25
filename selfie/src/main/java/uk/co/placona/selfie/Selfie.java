@@ -32,7 +32,7 @@ import java.util.Date;
 
 
 /**
- * Class to simplify the taking screenshots of your apps
+ * Class to simplify taking screenshots of your apps
  */
 public final class Selfie {
 
@@ -43,8 +43,7 @@ public final class Selfie {
     private static SelfieInstance mInstance;
 
     /**
-     * Create a snapshot
-     *
+     * Check for permissions and create a snapshot
      * @param activity Activity used by Selfie.
      */
     public static void snap(Activity activity) {
@@ -60,6 +59,10 @@ public final class Selfie {
         }
     }
 
+    /**
+     * This method is responsible for taking the screenshot and creating a file
+     * @param activity
+     */
     private static void takeScreenShot(Activity activity) {
         Date now = new Date();
         android.text.format.DateFormat.format(mInstance.getFormat(), now);
@@ -91,26 +94,47 @@ public final class Selfie {
         }
     }
 
+    /**
+     * Builds the class with all the optional parameters
+     */
     public static class Builder {
         private String format = "yyyy-MM-dd_hh:mm:ss";
         private String path = Environment.getExternalStorageDirectory().toString();
         private int quality = 100;
 
+        /**
+         *
+         * @param format
+         * @return
+         */
         public Builder format(String format) {
             this.format = format;
             return this;
         }
 
+        /**
+         * Path to which we will save the screenshots
+         * @param path
+         * @return
+         */
         public Builder path(String path) {
             this.path = path;
             return this;
         }
 
+        /**
+         * Quality which we should generate the image 1-100
+         * @param quality
+         * @return
+         */
         public Builder quality(int quality) {
             this.quality = quality;
             return this;
         }
 
+        /**
+         * Build a SelfieInstance with all the parameters
+         */
         public void build() {
             mInstance =  new SelfieInstance
                     .SelfieBuilder()
