@@ -29,12 +29,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new Selfie.Builder()
-                .format("yyyy-MM-dd_hh:mm:ss")
-                .path(Environment.getExternalStorageDirectory().toString())
-                .quality(100)
-                .build();
-
     }
 
     @Override

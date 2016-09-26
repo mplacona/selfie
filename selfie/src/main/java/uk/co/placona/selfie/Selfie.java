@@ -61,7 +61,7 @@ public final class Selfie {
 
     /**
      * This method is responsible for taking the screenshot and creating a file
-     * @param activity
+     * @param activity Activity used by Selfie.
      */
     private static void takeScreenShot(Activity activity) {
         Date now = new Date();
@@ -104,8 +104,8 @@ public final class Selfie {
 
         /**
          *
-         * @param format
-         * @return
+         * @param format The date format which the file will be created with
+         * @return Builder
          */
         public Builder format(String format) {
             this.format = format;
@@ -114,8 +114,8 @@ public final class Selfie {
 
         /**
          * Path to which we will save the screenshots
-         * @param path
-         * @return
+         * @param path The path where to save the file
+         * @return Builder
          */
         public Builder path(String path) {
             this.path = path;
@@ -124,8 +124,8 @@ public final class Selfie {
 
         /**
          * Quality which we should generate the image 1-100
-         * @param quality
-         * @return
+         * @param quality The quality (between 1-100) to save the file
+         * @return Builder
          */
         public Builder quality(int quality) {
             this.quality = quality;
