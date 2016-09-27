@@ -1,6 +1,6 @@
 selfie
 ===================
-A simple library to make taking screenshots of your apps.
+A simple library to make taking screenshots of your apps a breeze.
 
 With the Marshmallow release and the [new permissions model](https://developer.android.com/training/permissions/requesting.html), taking screenshots of your applications has become just slightly more complicated as you need to deal with permissions on the run.
 
