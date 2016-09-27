@@ -1,11 +1,5 @@
 apply plugin: 'com.android.library'
 
-ext {
-    PUBLISH_GROUP_ID = 'uk.co.placona.selfie'
-    PUBLISH_ARTIFACT_ID = 'selfie'
-    PUBLISH_VERSION = '0.0.1'
-}
-
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
@@ -36,5 +30,3 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.1.2'
 }
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
