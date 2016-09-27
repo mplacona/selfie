@@ -40,5 +40,5 @@ Selfie.snap(MainActivity.this);
 Downloading
 -----------
 ```groovy
-compile 'uk.co.placona.selfie:selfie:0.0.1'
+compile 'uk.co.placona.selfie:selfie:0.0.11'
 ```
