@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/mplacona/Selfie/selfie/images/download.svg) ](https://bintray.com/mplacona/Selfie/selfie/_latestVersion)
+
 selfie
 ===================
 A simple library to make taking screenshots of your apps a breeze.
