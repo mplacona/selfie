@@ -1,0 +1,39 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'uk.co.placona.selfie'
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'uk.co.placona.selfie'
+                artifactId 'selfie'
+
+                name 'Selfie'
+                description 'A simple library to make taking screenshots of your apps a breeze.'
+                url 'https://github.com/mplacona/selfie'
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'mplacona'
+                        name 'Marcos Placona'
+                        email 'marcos.placona@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/mplacona/selfie.git' // YOUR GIT REPO
+                    developerConnection 'https://github.com/mplacona/selfie.git' // YOUR GIT REPO
+                    url 'https://mplacona.github.io/selfie/'
+
+                }
+            }
+        }
+    }
+}
