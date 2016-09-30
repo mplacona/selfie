@@ -1,0 +1,21 @@
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-24.0.0
+    - android-24
+
+jdk:
+  - oraclejdk8
+
+branches:
+  except:
+    - gh-pages
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
