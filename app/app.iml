@@ -146,13 +146,18 @@
     <orderEntry type="library" exported="" scope="TEST" name="backport-util-concurrent-3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-profile-2.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="xercesMinimal-1.9.6.2" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="javassist-3.20.0-GA" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-settings-2.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-commons-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="accessibility-test-framework-2.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-module-junit4-common-1.6.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="wagon-http-lightweight-1.0-beta-6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="nekohtml-1.9.6.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-repository-metadata-2.2.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-reflect-1.6.4" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-module-junit4-rule-1.6.4" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="mockito-core-1.10.19" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-model-2.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="xmlpull-1.1.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-annotations-3.1.2" level="project" />
@@ -171,20 +176,27 @@
     <orderEntry type="library" exported="" scope="TEST" name="ant-1.8.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="ant-launcher-1.8.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="xpp3_min-1.1.4c" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-classloading-base-1.6.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-error-diagnostics-2.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="wagon-file-1.0-beta-6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="xstream-1.4.8" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="wagon-provider-api-1.0-beta-6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-util-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="bcprov-jdk16-1.46" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-api-support-1.6.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="wagon-http-shared-1.0-beta-6" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="objenesis-2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-artifact-2.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="guava-19.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-core-1.6.4" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-classloading-xstream-1.6.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="plexus-utils-1.5.15" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="maven-plugin-registry-2.2.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-api-mockito-1.6.4" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-analysis-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="robolectric-resources-3.1.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="protobuf-java-2.6.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="vtd-xml-2.11" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="powermock-module-junit4-1.6.4" level="project" />
   </component>
 </module>

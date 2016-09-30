@@ -1,5 +1,20 @@
 package uk.co.placona.selfie;
+import android.app.Activity;
+import android.os.Environment;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.io.File;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 /**
  * Copyright (C) 2016 mplacona.
@@ -17,14 +32,32 @@ import org.junit.Test;
  * limitations under the License.
  */
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Environment.class, File.class})
 public class SelfieTest {
+
+    @Mock
+    private File mDirectory;
+
     @Test
-    public void GetSelfieInstance()
-    {
-        // Arrange
-
-        // Act
-
-        // Assert
+    public void instanceOfSelfieIsCorrect(){
+        Selfie selfie = new Selfie();
+        assertThat(selfie, instanceOf(Selfie.class));
     }
+
+    private void mockEnvironment(){
+        mockStatic(Environment.class, File.class);
+
+        when(Environment.getExternalStorageDirectory())
+                .thenReturn(mDirectory);
+    }
+
+    @Test
+    public void instanceOfSelfieBuilderIsCorect(){
+        mockEnvironment();
+
+        Selfie.Builder selfieBuilder = new Selfie.Builder();
+        assertThat(selfieBuilder, instanceOf(Selfie.Builder.class));
+    }
+
 }
