@@ -1,9 +1,13 @@
 package uk.co.placona.selfie;
+import android.app.Activity;
 import android.os.Environment;
+import android.os.Process;
+import android.text.format.DateFormat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -31,7 +35,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Environment.class, File.class})
+@PrepareForTest({Environment.class, File.class, Process.class, DateFormat.class})
 public class SelfieTest {
 
     @Mock
@@ -44,18 +48,28 @@ public class SelfieTest {
     }
 
     private void mockEnvironment(){
-        mockStatic(Environment.class, File.class);
+        mockStatic(Environment.class, File.class, Process.class, DateFormat.class);
 
         when(Environment.getExternalStorageDirectory())
                 .thenReturn(mDirectory);
     }
 
     @Test
-    public void instanceOfSelfieBuilderIsCorect(){
+    public void instanceOfSelfieBuilderIsCorrect(){
         mockEnvironment();
 
         Selfie.Builder selfieBuilder = new Selfie.Builder();
         assertThat(selfieBuilder, instanceOf(Selfie.Builder.class));
+    }
+
+    @Test
+    public void wrongFileFormatThrows(){
+        mockEnvironment();
+        Activity mockActivity = Mockito.mock(Activity.class);
+
+        new Selfie.Builder().format("hello").build();
+
+        Selfie.snap(mockActivity);
     }
 
 }
