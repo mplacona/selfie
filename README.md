@@ -22,12 +22,12 @@ Initialising Selfie
 ---------------
 ```java
 new Selfie.Builder()
-                .format("yyyy-MM-dd_hh:mm:ss")
+                .fileFormat("yyyy-MM-dd_hh:mm:ss")
                 .path(Environment.getExternalStorageDirectory().toString())
                 .quality(100)
                 .build();
 ```
-> - **format**: Any valid date format according to [this](https://developer.android.com/reference/java/text/SimpleDateFormat.html).
+> - **fileFormat**: Any valid date fileFormat according to [this](https://developer.android.com/reference/java/text/SimpleDateFormat.html).
 > - **path**: The pace where you want to store your image in the device. Defaults to [Environment.getExternalStorageDirectory()](https://developer.android.com/reference/android/os/Environment.html#getExternalStorageDirectory())
 > - **quality**: The quality you want your screenshot to be created. Must be an int between 0 and 100. See [Bitmap Compress](https://developer.android.com/reference/android/graphics/Bitmap.html#compress(android.graphics.Bitmap.CompressFormat, int, java.io.OutputStream))
 

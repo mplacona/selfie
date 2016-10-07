@@ -21,9 +21,9 @@ import android.app.Application;
 import uk.co.placona.selfie.Selfie;
 
 public class SelfieApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Selfie.initWithDefaults();
-    }
+   @Override
+   public void onCreate() {
+      super.onCreate();
+      Selfie.initWithDefaults();
+   }
 }

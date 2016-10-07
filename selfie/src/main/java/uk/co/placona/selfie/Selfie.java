@@ -36,185 +36,187 @@ import java.util.Date;
  * Class to simplify taking screenshots of your apps
  */
 public final class Selfie {
-    // Default values
-    private static final String DEFAULT_FORMAT = "yyyy-MM-dd_hh:mm:ss";
-    private static final File DEFAULT_PATH = Environment.getExternalStorageDirectory();
-    private static final int DEFAULT_QUALITY = 100;
+   // Default values
+   private static final String DEFAULT_FILE_FORMAT = "yyyy-MM-dd_hh:mm:ss";
+   private static final File DEFAULT_PATH = Environment.getExternalStorageDirectory();
+   private static final int DEFAULT_QUALITY = 100;
 
-    // Storage Permissions variables
-    private static final int REQUEST_WRITE_STORAGE = 112;
+   // Storage Permissions variables
+   private static final int REQUEST_WRITE_STORAGE = 112;
 
-    // Singleton instance
-    private static volatile Selfie singleton = null;
+   // Singleton instance
+   private static volatile Selfie singleton = null;
 
-    // Configuration
-    @VisibleForTesting
-    final String format;
-    @VisibleForTesting
-    final File path;
-    @VisibleForTesting
-    final int quality;
+   // Configuration
+   @VisibleForTesting final String fileFormat;
+   @VisibleForTesting final File path;
+   @VisibleForTesting final int quality;
 
-    private Selfie() {
-        this(DEFAULT_FORMAT, DEFAULT_PATH, DEFAULT_QUALITY);
-    }
+   private Selfie() {
+      this(DEFAULT_FILE_FORMAT, DEFAULT_PATH, DEFAULT_QUALITY);
+   }
 
-    private Selfie(String format, File path, int quality) {
-        this.format = format;
-        this.path = path;
-        this.quality = quality;
-    }
+   private Selfie(String fileFormat, File path, int quality) {
+      this.fileFormat = fileFormat;
+      this.path = path;
+      this.quality = quality;
+   }
 
-    /**
-     * Initialize Selfie with default configuration:
-     * <ul>
-     * <li><b>Format:</b> yyyy-MM-dd_hh:mm:ss</li>
-     * <li><b>Path:</b> {@link Environment#getExternalStorageDirectory()}</li>
-     * <li><b>Quality:</b> 100</li>
-     * </ul>
-     */
-    public static void initWithDefaults() {
-        init(new Selfie());
-    }
+   /**
+    * Initialize Selfie with default configuration:
+    * <ul>
+    * <li><b>File fileFormat:</b> yyyy-MM-dd_hh:mm:ss</li>
+    * <li><b>Path:</b> {@link Environment#getExternalStorageDirectory()}</li>
+    * <li><b>Quality:</b> 100</li>
+    * </ul>
+    */
+   public static void initWithDefaults() {
+      init(new Selfie());
+   }
 
-    /**
-     * Initialize Selfie with specified Builder.
-     *
-     * @param builder Desired Selfie configuration.
-     */
-    public static void initWithBuilder(@NonNull Builder builder) {
-        if (builder == null) {
-            throw new IllegalArgumentException("Builder must not be null.");
-        }
+   /**
+    * Initialize Selfie with specified Builder.
+    *
+    * @param builder Desired Selfie configuration.
+    */
+   public static void initWithBuilder(@NonNull Builder builder) {
+      if (builder == null) {
+         throw new IllegalArgumentException("Builder must not be null.");
+      }
 
-        init(builder.build());
-    }
+      init(builder.build());
+   }
 
-    private static void init(@NonNull Selfie selfie) {
-        if (selfie == null) {
-            throw new IllegalArgumentException("Selfie must not be null.");
-        }
+   private static void init(@NonNull Selfie selfie) {
+      if (selfie == null) {
+         throw new IllegalArgumentException("Selfie must not be null.");
+      }
 
-        synchronized (Selfie.class) {
-            if (singleton != null) {
-                throw new IllegalStateException("Singleton instance already exists.");
-            }
+      synchronized (Selfie.class) {
+         if (singleton != null) {
+            throw new IllegalStateException("Singleton instance already exists.");
+         }
 
-            singleton = selfie;
-        }
-    }
+         singleton = selfie;
+      }
+   }
 
-    /**
-     * Check for permissions and create a snapshot
-     *
-     * @param activity Activity used by Selfie.
-     * @return {@code true} if the screenshot was taken, false otherwise.
-     * @throws IllegalStateException if neither {@link #initWithDefaults()} nor {@link #initWithBuilder(Builder)} were called.
-     */
-    public static boolean snap(Activity activity) {
-        synchronized (Selfie.class) {
-            if (singleton == null) {
-                throw new IllegalStateException("Selfie not initialized.");
-            }
-        }
+   /**
+    * @return the singleton instance of the Selfie class.
+    */
+   public static Selfie getInstance() {
+      synchronized (Selfie.class) {
+         if (singleton == null) {
+            throw new IllegalStateException("Selfie not initialized.");
+         }
 
-        boolean hasPermission = (ContextCompat.checkSelfPermission(activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-        if (!hasPermission) {
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_WRITE_STORAGE);
-            return false;
-        } else {
-            return takeScreenShot(activity);
-        }
-    }
+         return singleton;
+      }
+   }
 
-    /**
-     * This method is responsible for taking the screenshot and creating a file
-     *
-     * @param activity Activity used by Selfie.
-     * @return {@code true} if the screenshot was taken, false otherwise.
-     */
-    private static boolean takeScreenShot(Activity activity) {
-        Date now = new Date();
-        android.text.format.DateFormat.format(singleton.format, now);
+   /**
+    * Check for permissions and create a snapshot
+    *
+    * @param activity Activity used by Selfie.
+    * @return {@code true} if the screenshot was taken, false otherwise.
+    */
+   public boolean snap(Activity activity) {
+      boolean hasPermission = (ContextCompat.checkSelfPermission(activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+      if (!hasPermission) {
+         ActivityCompat.requestPermissions(activity,
+               new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+               REQUEST_WRITE_STORAGE);
+         return false;
+      } else {
+         return takeScreenShot(activity);
+      }
+   }
 
-        // create bitmap screen capture
-        View v1 = activity.getWindow().getDecorView().getRootView();
-        v1.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-        v1.setDrawingCacheEnabled(false);
+   /**
+    * This method is responsible for taking the screenshot and creating a file
+    *
+    * @param activity Activity used by Selfie.
+    * @return {@code true} if the screenshot was taken, false otherwise.
+    */
+   private boolean takeScreenShot(Activity activity) {
+      Date now = new Date();
+      android.text.format.DateFormat.format(fileFormat, now);
 
-        // image naming and path to include sd card appending name you choose for file
-        File imageFile = new File(singleton.path, now + ".jpg");
+      // create bitmap screen capture
+      View v1 = activity.getWindow().getDecorView().getRootView();
+      v1.setDrawingCacheEnabled(true);
+      Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+      v1.setDrawingCacheEnabled(false);
 
-        try {
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = singleton.quality;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException ex) {
-            return false;
-        }
+      // image naming and path to include sd card appending name you choose for file
+      File imageFile = new File(path, now + ".jpg");
 
-        return true;
-    }
+      try {
+         FileOutputStream outputStream = new FileOutputStream(imageFile);
+         bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+         outputStream.flush();
+         outputStream.close();
+      } catch (IOException ex) {
+         return false;
+      }
 
-    /**
-     * Builds the class with all the optional parameters
-     */
-    public static class Builder {
-        private String format = DEFAULT_FORMAT;
-        private File path = DEFAULT_PATH;
-        private int quality = DEFAULT_QUALITY;
+      return true;
+   }
 
-        /**
-         * @param format The date format which the file will be created with
-         * @return Builder
-         */
-        public Builder format(@NonNull String format) {
-            if (format == null)
-                throw new IllegalArgumentException("format == null");
+   /**
+    * Builds the class with all the optional parameters
+    */
+   public static class Builder {
+      private String format = DEFAULT_FILE_FORMAT;
+      private File path = DEFAULT_PATH;
+      private int quality = DEFAULT_QUALITY;
 
-            this.format = format;
-            return this;
-        }
+      /**
+       * @param fileFormat The date fileFormat which the file will be created with
+       * @return Builder
+       */
+      public Builder fileFormat(@NonNull String fileFormat) {
+         if (fileFormat == null)
+            throw new IllegalArgumentException("fileFormat == null");
 
-        /**
-         * Path to which we will save the screenshots
-         *
-         * @param path The path where to save the file
-         * @return Builder
-         */
-        public Builder path(@NonNull File path) {
-            if (path == null)
-                throw new IllegalArgumentException("path == null");
+         this.format = fileFormat;
+         return this;
+      }
 
-            this.path = path;
-            return this;
-        }
+      /**
+       * Path to which we will save the screenshots
+       *
+       * @param path The path where to save the file
+       * @return Builder
+       */
+      public Builder path(@NonNull File path) {
+         if (path == null)
+            throw new IllegalArgumentException("path == null");
 
-        /**
-         * Quality which we should generate the image 1-100
-         *
-         * @param quality The quality (between 1-100) to save the file
-         * @return Builder
-         */
-        public Builder quality(int quality) {
-            if (quality < 1 || quality > 100)
-                throw new IllegalArgumentException("quality must be between 1 and 100");
+         this.path = path;
+         return this;
+      }
 
-            this.quality = quality;
-            return this;
-        }
+      /**
+       * Quality which we should generate the image 1-100
+       *
+       * @param quality The quality (between 1-100) to save the file
+       * @return Builder
+       */
+      public Builder quality(int quality) {
+         if (quality < 1 || quality > 100)
+            throw new IllegalArgumentException("quality must be between 1 and 100");
 
-        /**
-         * Build a Selfie with all the parameters
-         */
-        Selfie build() {
-            return new Selfie(format, path, quality);
-        }
-    }
+         this.quality = quality;
+         return this;
+      }
+
+      /**
+       * Build a Selfie with all the parameters
+       */
+      Selfie build() {
+         return new Selfie(format, path, quality);
+      }
+   }
 }

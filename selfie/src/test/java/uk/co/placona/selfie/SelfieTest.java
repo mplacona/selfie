@@ -16,8 +16,6 @@
 
 package uk.co.placona.selfie;
 
-import android.app.Activity;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -25,49 +23,46 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.io.File;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 @RunWith(PowerMockRunner.class)
 public class SelfieTest {
-    @Test(expected = IllegalStateException.class)
-    public void testSelfieNotInitializedThrows() {
-        Activity mockActivity = mock(Activity.class);
+   @Test(expected = IllegalStateException.class)
+   public void testSelfieNotInitializedThrows() {
+      Selfie.getInstance();
+   }
 
-        Selfie.snap(mockActivity);
-    }
+   @Test(expected = IllegalArgumentException.class)
+   public void testNullFileFormatThrows() {
+      String fileFormat = null;
+      new Selfie.Builder().fileFormat(fileFormat);
+   }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullFormatThrows() {
-        String format = null;
-        new Selfie.Builder().format(format);
-    }
+   @Test(expected = IllegalArgumentException.class)
+   public void testNullPathThrows() {
+      File path = null;
+      new Selfie.Builder().path(path);
+   }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullPathThrows() {
-        File path = null;
-        new Selfie.Builder().path(path);
-    }
+   @Test(expected = IllegalArgumentException.class)
+   public void testInvalidQualityThrows() {
+      int quality = -1;
+      new Selfie.Builder().quality(quality);
+   }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidQualityThrows() {
-        int quality = -1;
-        new Selfie.Builder().quality(quality);
-    }
+   @Test
+   public void testBuilderCreatesCorrectInstance() {
+      String fileFormat = "fileFormat";
+      File path = new File("path");
+      int quality = 50;
 
-    @Test
-    public void testBuilderCreatesCorrectInstance() {
-        String format = "format";
-        File path = new File("path");
-        int quality = 50;
+      Selfie selfie = new Selfie.Builder()
+            .fileFormat(fileFormat)
+            .path(path)
+            .quality(quality)
+            .build();
 
-        Selfie selfie = new Selfie.Builder()
-                .format(format)
-                .path(path)
-                .quality(quality)
-                .build();
-
-        assertEquals(format, selfie.format);
-        assertEquals(path, selfie.path);
-        assertEquals(quality, selfie.quality);
-    }
+      assertEquals(fileFormat, selfie.fileFormat);
+      assertEquals(path, selfie.path);
+      assertEquals(quality, selfie.quality);
+   }
 }
