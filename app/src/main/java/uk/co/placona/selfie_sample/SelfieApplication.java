@@ -1,11 +1,4 @@
-package uk.co.placona.selfie_sample;
-
-import android.app.Application;
-import android.os.Environment;
-
-import uk.co.placona.selfie.Selfie;
-
-/**
+/*
  * Copyright (C) 2016 mplacona.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,15 +14,16 @@ import uk.co.placona.selfie.Selfie;
  * limitations under the License.
  */
 
+package uk.co.placona.selfie_sample;
+
+import android.app.Application;
+
+import uk.co.placona.selfie.Selfie;
+
 public class SelfieApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        new Selfie.Builder()
-                .format("yyyy-MM-dd_hh:mm:ss")
-                .path(Environment.getExternalStorageDirectory().toString())
-                .quality(100)
-                .build();
+        Selfie.initWithDefaults();
     }
 }
