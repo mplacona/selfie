@@ -1,6 +1,6 @@
 apply plugin: 'com.jfrog.bintray'
 
-version = '0.1'
+version = '1.0.0'
 def siteUrl = 'https://github.com/mplacona/selfie'
 def gitUrl = 'https://github.com/mplacona/selfie.git'
 
