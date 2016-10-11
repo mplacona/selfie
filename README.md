@@ -14,31 +14,35 @@ Usage
 -------------
 Two easy steps:
 
-1. From the activity you want to take screenshots or the application class initialise the`Selfie`.
+1. From the activity you want to take screenshots or the application class initialise the `Selfie`.
 
-2. Call `Selfie`'s static methods throughout your app.
+2. Obtain `Selfie`'s instance and use it throughout your app.
 
 Initialising Selfie
 ---------------
+### Using default configuration: ###
 ```java
-new Selfie.Builder()
-                .format("yyyy-MM-dd_hh:mm:ss")
-                .path(Environment.getExternalStorageDirectory().toString())
-                .quality(100)
-                .build();
+Selfie.initWithDefaults();
 ```
-> - **format**: Any valid date format according to [this](https://developer.android.com/reference/java/text/SimpleDateFormat.html).
+### Using builder: ###
+```java
+Selfie.initWithBuilder(new Selfie.Builder()
+                .fileFormat("yyyy-MM-dd_hh:mm:ss")
+                .path(Environment.getExternalStorageDirectory())
+                .quality(100));
+```
+> - **fileFormat**: Any valid date format according to [this](https://developer.android.com/reference/java/text/SimpleDateFormat.html).
 > - **path**: The pace where you want to store your image in the device. Defaults to [Environment.getExternalStorageDirectory()](https://developer.android.com/reference/android/os/Environment.html#getExternalStorageDirectory())
 > - **quality**: The quality you want your screenshot to be created. Must be an int between 0 and 100. See [Bitmap Compress](https://developer.android.com/reference/android/graphics/Bitmap.html#compress(android.graphics.Bitmap.CompressFormat, int, java.io.OutputStream))
 
 Taking a screenshot
 --------------
 ```java
-Selfie.snap(MainActivity.this);
+Selfie.getInstance().snap(MainActivity.this);
 ```
 
 Downloading
 -----------
 ```groovy
-compile 'uk.co.placona.selfie:selfie:0.0.11'
+compile 'uk.co.placona.selfie:selfie:1.0.0'
 ```

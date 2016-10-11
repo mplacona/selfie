@@ -1,24 +1,4 @@
-package uk.co.placona.selfie;
-import android.app.Activity;
-import android.os.Environment;
-import android.os.Process;
-import android.text.format.DateFormat;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.io.File;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-
-/**
+/*
  * Copyright (C) 2016 mplacona.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,42 +14,55 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
  * limitations under the License.
  */
 
+package uk.co.placona.selfie;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.io.File;
+
+import static org.junit.Assert.assertEquals;
+
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Environment.class, File.class, Process.class, DateFormat.class})
 public class SelfieTest {
+   @Test(expected = IllegalStateException.class)
+   public void testSelfieNotInitializedThrows() {
+      Selfie.getInstance();
+   }
 
-    @Mock
-    private File mDirectory;
+   @Test(expected = IllegalArgumentException.class)
+   public void testNullFileFormatThrows() {
+      String fileFormat = null;
+      new Selfie.Builder().fileFormat(fileFormat);
+   }
 
-    @Test
-    public void instanceOfSelfieIsCorrect(){
-        Selfie selfie = new Selfie();
-        assertThat(selfie, instanceOf(Selfie.class));
-    }
+   @Test(expected = IllegalArgumentException.class)
+   public void testNullPathThrows() {
+      File path = null;
+      new Selfie.Builder().path(path);
+   }
 
-    private void mockEnvironment(){
-        mockStatic(Environment.class, File.class, Process.class, DateFormat.class);
+   @Test(expected = IllegalArgumentException.class)
+   public void testInvalidQualityThrows() {
+      int quality = -1;
+      new Selfie.Builder().quality(quality);
+   }
 
-        when(Environment.getExternalStorageDirectory())
-                .thenReturn(mDirectory);
-    }
+   @Test
+   public void testBuilderCreatesCorrectInstance() {
+      String fileFormat = "fileFormat";
+      File path = new File("path");
+      int quality = 50;
 
-    @Test
-    public void instanceOfSelfieBuilderIsCorrect(){
-        mockEnvironment();
+      Selfie selfie = new Selfie.Builder()
+            .fileFormat(fileFormat)
+            .path(path)
+            .quality(quality)
+            .build();
 
-        Selfie.Builder selfieBuilder = new Selfie.Builder();
-        assertThat(selfieBuilder, instanceOf(Selfie.Builder.class));
-    }
-
-    @Test
-    public void wrongFileFormatThrows(){
-        mockEnvironment();
-        Activity mockActivity = Mockito.mock(Activity.class);
-
-        new Selfie.Builder().format("hello").build();
-
-        Selfie.snap(mockActivity);
-    }
-
+      assertEquals(fileFormat, selfie.fileFormat);
+      assertEquals(path, selfie.path);
+      assertEquals(quality, selfie.quality);
+   }
 }

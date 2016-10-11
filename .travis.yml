@@ -7,7 +7,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-24.0.0
+    - build-tools-24.0.2
     - android-24
 
 env:
@@ -23,3 +23,10 @@ cache:
   directories:
   - $HOME/.m2
   - $HOME/.gradle
+
+licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+
+script: ./gradlew build test
