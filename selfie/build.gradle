@@ -39,5 +39,5 @@ dependencies {
     testCompile "org.powermock:powermock-classloading-xstream:1.6.4"
 }
 
-apply from: 'install.gradle'
-apply from: 'bintray.gradle'
+//apply from: 'install.gradle'
+//apply from: 'bintray.gradle'
