@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/mplacona/Selfie/selfie/images/download.svg) ](https://bintray.com/mplacona/Selfie/selfie/_latestVersion)
+[![Build Status](https://travis-ci.org/mplacona/selfie.svg?branch=master)](https://travis-ci.org/mplacona/selfie) [![Download](https://api.bintray.com/packages/mplacona/Selfie/selfie/images/download.svg)](https://bintray.com/mplacona/Selfie/selfie/_latestVersion) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Selfie-green.svg?style=plastic)](http://android-arsenal.com/details/1/4708)
 
 selfie
 ===================
