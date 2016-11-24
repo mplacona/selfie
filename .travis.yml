@@ -9,6 +9,15 @@ android:
     - platform-tools
     - build-tools-24.0.2
     - android-24
+    - extra-android-m2repository
+
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
 env:
   global:
@@ -23,6 +32,8 @@ cache:
   directories:
   - $HOME/.m2
   - $HOME/.gradle
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
 
 licenses:
   - 'android-sdk-preview-license-.+'
